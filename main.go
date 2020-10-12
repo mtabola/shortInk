@@ -4,7 +4,6 @@ import (
 	"./functions"
 	"./globalVars"
 	"./handlers"
-	"./middlewares"
 	"context"
 	"database/sql"
 	"fmt"
@@ -22,7 +21,7 @@ func main() {
 	handler := http.NewServeMux()
 
 	handler.HandleFunc("/show/", handleLink)
-	handler.HandleFunc("/manage", middlewares.ContentChanger(handleInfo))
+	handler.HandleFunc("/manage", handleInfo)
 
 	globalVars.DB, err = sql.Open("mysql", "root:password@tcp(127.0.0.1:3306)/shortink")
 
@@ -85,7 +84,24 @@ func handleLink(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleInfo(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodGet {
+
+	switch r.Method {
+		case http.MethodGet:
+			path := r.URL.Path
+
+			if path == "/manage" {
+				path = "./webFiles/registratrateNewLink.html"
+			} else {
+				path = "." + path
+			}
+			http.ServeFile(w, r, path)
+
+		case http.MethodPost:
+			handlers.PostHandler(w, r)
+	}
+
+
+	/*if r.Method == http.MethodGet {
 		handlers.GetHandler(w, r)
 	} else if r.Method == http.MethodPost {
 		handlers.PostHandler(w, r)
@@ -93,5 +109,5 @@ func handleInfo(w http.ResponseWriter, r *http.Request) {
 		handlers.DeleteHandler(w, r)
 	} else {
 		w = functions.GetResponse("Undefind method, please select another", fmt.Sprintf("Undefind method %s", r.Method), http.StatusBadRequest, w)
-	}
+	}*/
 }

@@ -2,35 +2,35 @@ package handlers
 
 import (
 	"../functions"
-	"../globalVars"
-	"../structures"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
+	"../globalVars"
+	"../structures"
 )
 
 func PostHandler(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		w = functions.GetResponse("Can't read the request body", err.Error(), http.StatusBadRequest, w)
-		return
-	}
-	strBody := string(body)
-	var custLink []string
+	r.ParseMultipartForm(0)
 
-	strBody = strings.ReplaceAll(strBody, " ", "")
+	inFLink := r.FormValue("fullLink")
+	inSLink := r.FormValue("shortLink")
+	/*strBody := string(body)
+	var custLink []string*/
 
-	if (!strings.HasPrefix(strBody, "http://") && !strings.HasPrefix(strBody, "https://")) || len(strings.Split(strBody, ".")) != 2 {
+	inFLink = strings.ReplaceAll(inFLink, " ", "")
+	if (!strings.HasPrefix(inFLink, "http://") && !strings.HasPrefix(inFLink, "https://")) || len(strings.Split(inFLink, ".")) != 2 {
 		w = functions.GetResponse("Link is not correct", "", http.StatusBadRequest, w)
 		return
 	}
 
-	if !strings.Contains(strBody, "==>") {
-		strBody = fmt.Sprintf("%s==>%x", strBody, functions.HashGeneration(strBody))
-	}
 
-	custLink = strings.Split(strBody, "==>")
+	fmt.Printf("%s, %s", inFLink, inSLink)
+
+
+
+	if(inSLink == "") {
+		inSLink = fmt.Sprintf("%x", functions.HashGeneration(inFLink))
+	}
 
 	lksLen := len(globalVars.Links.Links)
 
@@ -43,11 +43,11 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 
 	newLink := structures.Link{
 		LinkId:    id,
-		FullLink:  custLink[0],
-		ShortLink: custLink[1],
+		FullLink:  inFLink,
+		ShortLink: inSLink,
 	}
 
-	err = globalVars.Links.AddLink(newLink, globalVars.DB)
+	err := globalVars.Links.AddLink(newLink, globalVars.DB)
 
 	if err != nil {
 		w = functions.GetResponse("AddLink fault", err.Error(), http.StatusBadRequest, w)
