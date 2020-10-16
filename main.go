@@ -20,7 +20,7 @@ func main() {
 	handler.HandleFunc("/add", handles.AddHandle)
 	handler.HandleFunc("/save", handles.SaveHandle)
 	handler.HandleFunc("/response", handles.ResponseHandle)
-	//handler.HandleFunc("/manage/", handleInfo)*/
+	handler.HandleFunc("/edit", handles.EditHandle)
 
 
 	functions.OpenDatabase()

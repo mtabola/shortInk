@@ -22,6 +22,15 @@ func IndexHandle(w http.ResponseWriter, r *http.Request) {
 		}
 
 		t.ExecuteTemplate(w, "index", globalVars.Links.Links)
+	} else {
+		for _, link := range globalVars.Links.Links {
+			if link.ShortLink == url {
+				http.Redirect(w, r, link.FullLink, http.StatusFound)
+				return
+			}
+		}
+		globalVars.Response.GetResponse("Link not found", "Link not found")
+		http.Redirect(w, r, "/response", http.StatusNotFound)
 	}
 }
 
