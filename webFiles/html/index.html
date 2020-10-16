@@ -1,0 +1,12 @@
+{{define "index"}}
+
+{{template "header"}}
+{{range $key, $value := .}}
+    <div>
+        <h1><a href="{{$value.FullLink}}" target="_blank">{{$value.ShortLink}}</a></h1>
+        <a href="/edit?id={{$key}}">Edit</a>
+    </div>
+{{end}}
+
+{{template "footer"}}
+{{end}}

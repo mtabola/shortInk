@@ -55,7 +55,7 @@ func (l *LinksList) AddLink(link Link, db *sql.DB) error {
 	_, err := db.Exec("INSERT INTO link(FullLink, ShortLink) VALUES (?, ?)", link.FullLink, link.ShortLink)
 
 	if err != nil {
-		return errors.New("Insert in database fault")
+		return err
 	}
 
 	return nil
@@ -74,4 +74,13 @@ func (l *LinksList) DeleteLink(link Link, db *sql.DB) error {
 		}
 	}
 	return errors.New("This link doesn't exist")
+}
+
+func (l *LinksList) EditLink(link Link, db *sql.DB) error {
+	_, err := db.Exec("UPDATE link SET FullLink = ?, ShortLink = ? WHERE LinkId = ?", link.FullLink, link.ShortLink, link.LinkId)
+
+	if err != nil {
+		return err
+	}
+	return nil
 }

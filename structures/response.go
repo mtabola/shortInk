@@ -2,5 +2,10 @@ package structures
 
 type Response struct {
 	Message interface{} `json:"Message"`
-	Error   string      `json:"Error"`
+	Error   interface{} `json:"Error"`
+}
+
+func (r *Response) GetResponse(msg interface{}, err interface{}) {
+	r.Message = msg
+	r.Error = err
 }

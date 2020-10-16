@@ -1,0 +1,11 @@
+{{define "response"}}
+{{template "header"}}
+    <div>
+        <h1>{{.Message}}</h1>
+        {{if .Error}}
+            <p>{{.Error}}</p>
+        {{end}}
+    </div>
+
+{{template "footer"}}
+{{end}}

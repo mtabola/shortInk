@@ -1,39 +1,30 @@
 package main
 
 import (
-	"./functions"
-	"./globalVars"
-	"./handlers"
 	"context"
-	"database/sql"
-	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"./functions"
+	"./handles"
 )
 
 func main() {
-	var err error
 	handler := http.NewServeMux()
 
-	handler.HandleFunc("/show/", handleLink)
-	handler.HandleFunc("/manage", handleInfo)
+	handler.HandleFunc("/", handles.IndexHandle)
+	handler.HandleFunc("/add", handles.AddHandle)
+	handler.HandleFunc("/save", handles.SaveHandle)
+	handler.HandleFunc("/response", handles.ResponseHandle)
+	//handler.HandleFunc("/manage/", handleInfo)*/
 
-	globalVars.DB, err = sql.Open("mysql", "root:password@tcp(127.0.0.1:3306)/shortink")
 
-	if err != nil {
-		log.Fatal("Database is not open")
-	}
-	defer globalVars.DB.Close()
+	functions.OpenDatabase()
 
-	err = globalVars.Links.FillFromDatabase(globalVars.DB)
-	if err != nil {
-		log.Fatal("Data not loaded")
-	}
 
 	srv := http.Server{
 		Addr:              ":8000",
@@ -73,41 +64,4 @@ func main() {
 	srv.Shutdown(context.Background())
 	log.Print("Done")
 
-}
-
-func handleLink(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodGet {
-		handlers.ConnectHandler(w, r)
-	} else {
-		w = functions.GetResponse("Undefind method, please select another", fmt.Sprintf("Undefind method %s", r.Method), http.StatusOK, w)
-	}
-}
-
-func handleInfo(w http.ResponseWriter, r *http.Request) {
-
-	switch r.Method {
-		case http.MethodGet:
-			path := r.URL.Path
-
-			if path == "/manage" {
-				path = "./webFiles/registratrateNewLink.html"
-			} else {
-				path = "." + path
-			}
-			http.ServeFile(w, r, path)
-
-		case http.MethodPost:
-			handlers.PostHandler(w, r)
-	}
-
-
-	/*if r.Method == http.MethodGet {
-		handlers.GetHandler(w, r)
-	} else if r.Method == http.MethodPost {
-		handlers.PostHandler(w, r)
-	} else if r.Method == http.MethodDelete {
-		handlers.DeleteHandler(w, r)
-	} else {
-		w = functions.GetResponse("Undefind method, please select another", fmt.Sprintf("Undefind method %s", r.Method), http.StatusBadRequest, w)
-	}*/
 }

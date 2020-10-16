@@ -1,0 +1,24 @@
+{{define "linkInterection"}}
+
+{{template "header"}}
+    <div>
+        <form role="form" method="POST" action="/save">
+            <input type="hidden" name="id" value="{{.LinkId}}">
+
+            <label for="fullLink">Full Link</label>
+            <input type="text" name="fullLink" id="fullLink" value="{{.FullLink}}">
+
+            <label for="shortLink">Custom Short Link</label>
+            <input type="text" name="shortLink" id="shortLink" value="{{.ShortLink}}">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div>
+        {{if .Id}}
+            <a href="/delete?id={{.Id}}">Delete</a>
+        {{end}}
+    </div>
+
+{{template "footer"}}
+{{end}}

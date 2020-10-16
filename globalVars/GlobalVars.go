@@ -10,3 +10,5 @@ var Links = structures.LinksList{
 }
 
 var DB *sql.DB
+
+var Response = structures.Response{nil, nil}
