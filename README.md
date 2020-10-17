@@ -4,9 +4,9 @@ ShortInk - специальный HTTP сервис предназначенны
 
 # Требуемое программное обеспечение
   + [MySql][1] 
-  + [GoLand 2020.2.2] [2]
-  + [Git] [3]
-  + [Go Compiler] [4]
+  + [GoLand 2020.2.2][2]
+  + [Git][3]
+  + [Go Compiler][4]
 
 # Инструкция по применению
   - Скачать данный проект из репозитория с помощью `git clone https://github.com/r00tm4k3r/shortInk.git` 
@@ -21,35 +21,48 @@ ShortInk - специальный HTTP сервис предназначенны
 
 # Инструкция по применению
   После того, как запустился сервис, Вы можете создать новую короткую ссылку  
-  ![Картинка добавления](https://github.com/r00tm4k3r/shortInk/mdResources/addLink.png)
   
-  Поле FullLink должно быть автоматически заполнено.
+  <p align="center">
+        <img src="mdResources/addLink.png" alt="Картинка добавления"/>
+  </p>
+  
+  Поле FullLink нужно обязательно заполнить, и ссылка должна иметь следующий формат: http://\*.*
   
   При создании Вы можете оставить поле ShortLink пустым, тогда название выдастся автоматически.
   
-  ![Заполняемые поля](https://github.com/r00tm4k3r/shortInk/mdResources/addLinkFields.png)
+  <p align="center">
+        <img src="mdResources/addLinkFields.png" alt="Заполняемые поля"/>
+  </p>
   
   После чего, эта ссылка доступна в главном меню. Вы можете:
   - Перейти на сайт, кликнув на короткую ссылку
   - Изменить данные о ссылке
   
-  ![Картинка изменения](https://github.com/r00tm4k3r/shortInk/mdResources/editLink.png)
-  
+  <p align="center">
+        <img src="mdResources/editLink.png" alt="Картинка изменения"/>
+  </p>
+    
   В разделе "изменить" Вы можете поменять как и полную ссылку, так и изменить название короткой ссылки или удалить его вовсе (В этом случае короткое наименование будет создано автоматически).
   
   Так-же кроме изменения, вы можете удалить данные. Тогда удаляется полная и короткая ссылка.
   
-  ![Картинка удаления](https://github.com/r00tm4k3r/shortInk/mdResources/deleteLink.png)
+  <p align="center">
+        <img src="mdResources/deleteLink.png" alt="Картинка удаления"/>
+  </p>
   
   **Пример**
   
   До удаления
   
-  ![Картинка до удаления](https://github.com/r00tm4k3r/shortInk/mdResources/beforeDelete.png)
+  <p align="center">
+        <img src="mdResources/beforeDelete.png" alt="Картинка до удаления"/>
+  </p>
   
   После удаления
   
-  ![Картинка после удаления](https://github.com/r00tm4k3r/shortInk/mdResources/afterDelete.png)
+  <p align="center">
+        <img src="mdResources/afterDelete.png" alt="Картинка после удаления"/>
+  </p>
     
 [1]: https://dev.mysql.com/downloads/
 [2]: https://www.jetbrains.com/go/promo/?gclid=Cj0KCQjwzbv7BRDIARIsAM-A6-2OQr1jyKcsbO5anp7-3vmwF2G0aPFHUQddpiDI5YceIWusZk6kYFQaAvv9EALw_wcB
