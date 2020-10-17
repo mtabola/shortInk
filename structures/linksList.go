@@ -3,8 +3,6 @@ package structures
 import (
 	"database/sql"
 	"errors"
-	"fmt"
-	"log"
 )
 
 type LinksList struct {
@@ -67,7 +65,7 @@ func (l *LinksList) DeleteLink(link Link, db *sql.DB) error {
 			_, err := db.Exec("DELETE FROM link WHERE ShortLink = ?", link.ShortLink)
 			l.Links = append(l.Links[:i], l.Links[i+1:]...)
 			if err != nil {
-				log.Print(fmt.Sprintf(err.Error()))
+				return err
 			}
 
 			return nil
@@ -77,7 +75,16 @@ func (l *LinksList) DeleteLink(link Link, db *sql.DB) error {
 }
 
 func (l *LinksList) EditLink(link Link, db *sql.DB) error {
+
+	for i, lk := range l.Links {
+		if lk.LinkId == link.LinkId {
+			l.Links[i] = link
+		}
+	}
+
 	_, err := db.Exec("UPDATE link SET FullLink = ?, ShortLink = ? WHERE LinkId = ?", link.FullLink, link.ShortLink, link.LinkId)
+
+
 
 	if err != nil {
 		return err

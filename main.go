@@ -21,6 +21,7 @@ func main() {
 	handler.HandleFunc("/save", handles.SaveHandle)
 	handler.HandleFunc("/response", handles.ResponseHandle)
 	handler.HandleFunc("/edit", handles.EditHandle)
+	handler.HandleFunc("/delete", handles.DeleteHandle)
 
 
 	functions.OpenDatabase()

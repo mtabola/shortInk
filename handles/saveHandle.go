@@ -16,8 +16,19 @@ func SaveHandle(w http.ResponseWriter, r *http.Request) {
 	fullLink :=r.FormValue("fullLink")
 	shortLink :=r.FormValue("shortLink")
 
+
 	var l *structures.Link
 	var editStatus bool = true
+	var err error
+	var numId int
+
+	if fullLink == "" {
+		globalVars.Response.GetResponse("Enter Full Link", "Full Link not found")
+		goto Redirect
+	} else if (!strings.HasPrefix(fullLink, "http://") && !strings.HasPrefix(fullLink, "https://")) || len(strings.Split(fullLink, ".")) != 2 {
+		globalVars.Response.GetResponse("Full Link wrong format", "Full Link don't have format \"http://*.*\"")
+		goto Redirect
+	}
 
 	if id == "" {
 		lksLen := len(globalVars.Links.Links)
@@ -28,7 +39,7 @@ func SaveHandle(w http.ResponseWriter, r *http.Request) {
 		}
 		editStatus = false
 	}
-	numId, err := strconv.Atoi(id)
+	numId, err = strconv.Atoi(id)
 
 	if err != nil {
 		globalVars.Response.GetResponse("Operation fault", err.Error())
