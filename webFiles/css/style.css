@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    background: #272822;
+    color: #f7f7f7;
+    font-family: "Comic Sans MS";
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 1%;
+    align-items: start;
+}
+
+.headerList {
+    display: grid;
+    align-items: center;
+}
+
+.headerList li {
+    margin: 10px;
+}
+
+.linkContent {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.menu {
+    display: grid;
+    justify-items: end;
+    align-items: end;
+
+}
+
+.menu ul {
+    display: grid;
+    align-itemsч: end;
+}
+
+.menu a {
+    background: #43B581;
+    font-size: 35px;
+    padding: 7px;
+    border-radius: 4px;
+}
+
+.editLink {
+    background: #D9B618;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 4px;
+    color: black;
+}
+
+.content {
+    display: grid;
+    justify-items: center;
+    border: #7289DA dashed 1px;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    grid-column: 2;
+}
+
+.content h1 {
+    margin-bottom: 10px;
+    font-size: 30px;
+
+}
+
+.formForLink {
+    display: grid;
+}
+
+.formForInput {
+    display: grid;
+    margin-bottom: 15px;
+}
+
+.formForLink input {
+    border: none;
+    border-bottom: 2px solid #595B5D;
+    font-size: 25px;
+    color: #D9B618;
+    outline: none;
+}
+
+.formForLink label {
+    font-size: 20px;
+}
+
+.content .deleteLink a {
+    color: #FF0F23;
+    font-size: 20px;
+}
+.deleteLink {
+    display: grid;
+    margin-top: 20px;
+}
+
+.formForLink button {
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    background: #43B581;
+    cursor: pointer;
+    border-radius: 4px;
+}

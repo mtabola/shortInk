@@ -2,9 +2,9 @@
 
 {{template "header"}}
 {{range $key, $value := .}}
-    <div>
+    <div class="content">
         <h1><a href="{{$value.FullLink}}" target="_blank">{{$value.ShortLink}}</a></h1>
-        <a href="/edit?id={{$key}}">Edit</a>
+        <a href="/edit?id={{$key}}" class="editLink">Edit</a>
     </div>
 {{end}}
 

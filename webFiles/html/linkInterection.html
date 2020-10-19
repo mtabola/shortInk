@@ -1,26 +1,27 @@
 {{define "linkInterection"}}
 
 {{template "header"}}
-    <div>
-        <div>
-            <form role="form" method="POST" action="/save">
+        <div class="content">
+            <form role="form" method="POST" action="/save" class="formForLink">
                 <input type="hidden" name="id" value="{{.LinkId}}">
 
-                <label for="fullLink">Full Link</label>
-                <input type="text" name="fullLink" id="fullLink" value="{{.FullLink}}">
+                <div class="formForInput">
+                    <label for="fullLink">Full Link</label>
+                    <input type="text" name="fullLink" id="fullLink" value="{{.FullLink}}">
+                </div>
 
-                <label for="shortLink">Custom Short Link</label>
-                <input type="text" name="shortLink" id="shortLink" value="{{.ShortLink}}">
+                <div class="formForInput">
+                    <label for="shortLink">Custom Short Link</label>
+                    <input type="text" name="shortLink" id="shortLink" value="{{.ShortLink}}">
+                </div>
                 <button type="submit">Submit</button>
             </form>
+            <div class="deleteLink">
+                {{ if .LinkId }}
+                    <a href="/delete?id={{.LinkId}}">Delete</a>
+                {{ end }}
+            </div>
         </div>
-
-        <div>
-            {{ if .LinkId }}
-                <a href="/delete?id={{.LinkId}}">Delete</a>
-            {{ end }}
-        </div>
-    </div>
 
 {{template "footer"}}
 {{end}}

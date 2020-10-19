@@ -16,6 +16,8 @@ import (
 func main() {
 	handler := http.NewServeMux()
 
+
+	handler.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./webFiles/css"))))
 	handler.HandleFunc("/", handles.IndexHandle)
 	handler.HandleFunc("/add", handles.AddHandle)
 	handler.HandleFunc("/save", handles.SaveHandle)

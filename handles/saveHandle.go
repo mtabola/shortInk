@@ -25,7 +25,7 @@ func SaveHandle(w http.ResponseWriter, r *http.Request) {
 	if fullLink == "" {
 		globalVars.Response.GetResponse("Enter Full Link", "Full Link not found")
 		goto Redirect
-	} else if (!strings.HasPrefix(fullLink, "http://") && !strings.HasPrefix(fullLink, "https://")) || len(strings.Split(fullLink, ".")) != 2 {
+	} else if (!strings.HasPrefix(fullLink, "http://") && !strings.HasPrefix(fullLink, "https://")) || len(strings.Split(fullLink, ".")) < 2 {
 		globalVars.Response.GetResponse("Full Link wrong format", "Full Link don't have format \"http://*.*\"")
 		goto Redirect
 	}
